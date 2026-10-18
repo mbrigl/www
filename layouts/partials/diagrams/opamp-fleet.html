@@ -1,0 +1,60 @@
+{{- $n := "diagram/node.html" -}}
+{{- $title := "Architecture of opamp-fleet" -}}
+{{- $desc := "A fleet server talks OpAMP to clients. A client in supervisor mode runs Collector and custom supervisors as plugins, which manage OpenTelemetry Collectors and foreign agents. A client in gateway mode carries many downstream clients over a small pool of connections. The server sees only agents, by instance_uid, never the connection that carried them." -}}
+
+{{/* Wide layout, for desktop */}}
+<svg class="dg dg--wide" viewBox="0 0 960 492" role="img" aria-labelledby="dg-of-w-t dg-of-w-d">
+  <title id="dg-of-w-t">{{ $title }}</title>
+  <desc id="dg-of-w-d">{{ $desc }}</desc>
+  <defs><marker id="dg-of-w-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="dg-head" d="M0 0L10 5L0 10z"/></marker></defs>
+
+  <path class="dg-link" d="M244 92V160"/>
+  <text class="dg-note" x="254" y="132">OpAMP</text>
+  <path class="dg-link" d="M676 92V160M716 92V160"/>
+  <text class="dg-note" x="726" y="132">few pooled connections</text>
+  <path class="dg-edge" d="M139 288V348" marker-end="url(#dg-of-w-a)"/><path class="dg-edge" d="M349 288V354" marker-end="url(#dg-of-w-a)"/>
+  <text class="dg-note" x="149" y="326">manages</text>
+  <path class="dg-link" d="M564 300V350M716 300V350M868 300V350"/>
+
+  {{ partial $n (dict "x" 160 "y" 16 "w" 640 "h" 76 "hi" true "label" "SERVER" "title" "Fleet server" "text" "Holds the desired config · pushes only what differs · REST API and UI") }}
+
+  {{ partial $n (dict "x" 24 "y" 160 "w" 440 "h" 140 "group" true "label" "CLIENT · SUPERVISOR MODE" "title" "Native OS service" "text" "Linux · macOS · Windows · self-update") }}
+  {{ partial $n (dict "x" 44 "y" 236 "w" 190 "h" 52 "title" "Collector supervisor") }}
+  {{ partial $n (dict "x" 254 "y" 236 "w" 190 "h" 52 "title" "Custom supervisor") }}
+  {{ partial $n (dict "x" 44 "y" 356 "w" 190 "h" 56 "stack" true "title" "OTel Collectors" "text" "OpenTelemetry") }}
+  {{ partial $n (dict "x" 254 "y" 356 "w" 190 "h" 56 "title" "Foreign agent" "text" "does not speak OpAMP") }}
+
+  {{ partial $n (dict "x" 496 "y" 160 "w" 440 "h" 140 "group" true "label" "CLIENT · GATEWAY MODE" "title" "Gateway" "text" "Multiplexes other clients upstream") }}
+  {{ partial $n (dict "x" 516 "y" 236 "w" 400 "h" 52 "title" "Connection pool") }}
+  {{ range slice 496 648 800 }}{{ partial $n (dict "x" . "y" 356 "w" 136 "h" 56 "stack" true "center" true "title" "Client" "text" "with its agents") }}{{ end }}
+
+  <text class="dg-note dg-note--foot" x="480" y="470" text-anchor="middle">The server sees only agents, identified by instance_uid, never the connection that carried them.</text>
+</svg>
+
+{{/* Tall layout, for phones: the gateway's pooled connections run down the right edge */}}
+<svg class="dg dg--tall" viewBox="0 0 360 780" role="img" aria-labelledby="dg-of-t-t dg-of-t-d">
+  <title id="dg-of-t-t">{{ $title }}</title>
+  <desc id="dg-of-t-d">{{ $desc }}</desc>
+  <defs><marker id="dg-of-t-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="dg-head" d="M0 0L10 5L0 10z"/></marker></defs>
+
+  <path class="dg-link" d="M60 92V152"/>
+  <text class="dg-note" x="70" y="127">OpAMP</text>
+  <path class="dg-link" d="M322 92V452M334 92V452"/>
+  <path class="dg-edge" d="M91 292V336" marker-end="url(#dg-of-t-a)"/><path class="dg-edge" d="M229 292V342" marker-end="url(#dg-of-t-a)"/>
+  <path class="dg-link" d="M66 592V634M180 592V634M294 592V634"/>
+
+  {{ partial $n (dict "x" 16 "y" 16 "w" 328 "h" 76 "hi" true "label" "SERVER" "title" "Fleet server" "text" "Desired config · REST API · UI") }}
+
+  {{ partial $n (dict "x" 16 "y" 152 "w" 288 "h" 152 "group" true "label" "CLIENT · SUPERVISOR MODE" "title" "Native OS service" "text" "Linux · macOS · Windows") }}
+  {{ partial $n (dict "x" 28 "y" 228 "w" 126 "h" 64 "center" true "title" "Collector" "text" "supervisor") }}
+  {{ partial $n (dict "x" 166 "y" 228 "w" 126 "h" 64 "center" true "title" "Custom" "text" "supervisor") }}
+  {{ partial $n (dict "x" 28 "y" 344 "w" 126 "h" 56 "stack" true "center" true "title" "Collectors" "text" "OpenTelemetry") }}
+  {{ partial $n (dict "x" 166 "y" 344 "w" 126 "h" 56 "center" true "title" "Foreign agent" "text" "no OpAMP") }}
+
+  {{ partial $n (dict "x" 16 "y" 452 "w" 328 "h" 140 "group" true "label" "CLIENT · GATEWAY MODE" "title" "Gateway" "text" "Many clients, few connections") }}
+  {{ partial $n (dict "x" 28 "y" 528 "w" 304 "h" 52 "title" "Connection pool") }}
+  {{ range slice 16 130 244 }}{{ partial $n (dict "x" . "y" 640 "w" 100 "h" 56 "stack" true "center" true "title" "Client" "text" "+ agents") }}{{ end }}
+
+  <text class="dg-note dg-note--foot" x="180" y="740" text-anchor="middle">The server sees only agents by instance_uid,</text>
+  <text class="dg-note dg-note--foot" x="180" y="760" text-anchor="middle">never the connection that carried them.</text>
+</svg>

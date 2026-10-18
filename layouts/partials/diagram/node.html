@@ -1,0 +1,14 @@
+{{- /* One box in an SVG diagram. Params: x, y, w, h, label, title, text, and the flags
+  hi (accent border), group (dashed container, its text at the top), center (centred text)
+  and stack (a second box behind it, for "many of these"). */ -}}
+{{- $center := .center | default false -}}
+{{- $tx := cond $center (add .x (div .w 2)) (add .x 16) -}}
+{{- $title := add .y (cond (gt (len (.label | default "")) 0) 44 26) -}}
+{{- if not (or .label .text) }}{{ $title = add .y (div .h 2) 5 }}{{ end -}}
+<g class="dg-node{{ if .hi }} dg-node--hi{{ end }}{{ if .group }} dg-group{{ end }}" text-anchor="{{ cond $center "middle" "start" }}">
+  {{- if .stack }}<rect class="dg-back" x="{{ add .x 6 }}" y="{{ sub .y 6 }}" width="{{ .w }}" height="{{ .h }}" rx="8"/>{{ end -}}
+  <rect x="{{ .x }}" y="{{ .y }}" width="{{ .w }}" height="{{ .h }}" rx="8"/>
+  {{- with .label }}<text class="dg-label" x="{{ $tx }}" y="{{ add $.y 22 }}">{{ . }}</text>{{ end -}}
+  <text class="dg-title" x="{{ $tx }}" y="{{ $title }}">{{ .title }}</text>
+  {{- with .text }}<text class="dg-text" x="{{ $tx }}" y="{{ add $title 20 }}">{{ . }}</text>{{ end -}}
+</g>

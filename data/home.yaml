@@ -22,6 +22,15 @@ vision:
   statement: "Software should be described by what it means, not by the technology it happens to run on."
   text: "Since 2003 I have worked on one idea: describe the system first, then let tools produce the technology. From UML-based ERP frameworks and an Eclipse code generator to a low-code platform on hexagonal architecture, the stack changed many times. Today, with AI in the loop, the written specification takes the same role: specs and architecture decisions define the intent, and coding agents build against them. What stays is the description of intent."
 
+# Vision graphic: one description of intent on top, the stacks it was built with below
+eras_intent: { label: "STAYS", title: "Model and spec", text: "The description of intent" }
+eras_caption: "The stack changed with every generation. The description of intent stayed."
+eras:
+  - { years: "2003", title: "ERP/CRM platform",        text: "Model-oriented Java · UML" }
+  - { years: "2005", title: "Eclipse code generator",  text: "UML2 designer · enterprise Java" }
+  - { years: "2016", title: "Low-code CAFM platform",  text: "MDA · hexagonal · Java, C++, Rust" }
+  - { years: "2026", title: "Spec-driven with agents", text: "Specs · ADRs · coding agents" }
+
 principles:
   - { n: "01", title: "Start from the model",       text: "Describe what a system means, independent of any platform. Technologies change, the model stays." }
   - { n: "02", title: "Write the spec first",       text: "Specifications and architecture decision records define intent before code. People decide, agents implement, and the spec is the contract between them." }

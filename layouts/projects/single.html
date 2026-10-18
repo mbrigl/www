@@ -31,7 +31,9 @@
     {{ $n = add $n 1 }}
     <p class="psec__label"><span>{{ printf "%02d" $n }}</span> / Architecture</p>
     <h2>How it fits together</h2>
-    {{ with $.Params.flow }}<div class="card flowbox">{{ partial "flow.html" . }}</div>{{ end }}
+    {{ $diagram := printf "diagrams/%s.html" $.File.ContentBaseName }}
+    {{ if templates.Exists (printf "partials/%s" $diagram) }}<figure class="card flowbox">{{ partial $diagram $ }}</figure>
+    {{ else if $.Params.flow }}<div class="card flowbox">{{ partial "flow.html" $.Params.flow }}</div>{{ end }}
     <div class="rows">
       {{ range . }}<div class="row"><h3>{{ .title }}</h3><p class="muted">{{ .text }}</p></div>{{ end }}
     </div>

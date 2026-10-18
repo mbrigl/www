@@ -33,6 +33,15 @@
       <h2>{{ $h.vision.heading }}</h2>
       <p class="statement">{{ $h.vision.statement }}</p>
       <p class="muted prose-narrow">{{ $h.vision.text }}</p>
+      {{ with $h.eras }}
+      <figure class="eras">
+        {{ with $h.eras_intent }}<div class="flow__node flow__node--hi eras__intent"><p class="flow__label">{{ .label }}</p><p class="flow__title">{{ .title }}</p><p class="flow__text">{{ .text }}</p></div>{{ end }}
+        <ol class="eras__list" style="--n: {{ len . }}">
+          {{ range . }}<li class="flow__node"><p class="flow__label">{{ .years }}</p><p class="flow__title">{{ .title }}</p><p class="flow__text">{{ .text }}</p></li>{{ end }}
+        </ol>
+        {{ with $h.eras_caption }}<figcaption class="muted small">{{ . }}</figcaption>{{ end }}
+      </figure>
+      {{ end }}
       <div class="rows">
         {{ range $h.principles }}
         <div class="row"><span class="row__n">{{ .n }}</span><h3>{{ .title }}</h3><p class="muted">{{ .text }}</p></div>
