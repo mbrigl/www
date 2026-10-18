@@ -1,0 +1,131 @@
+{{ define "main" }}
+{{ $h := hugo.Data.home }}
+{{ $c := hugo.Data.career }}
+<div class="wrap">
+
+  <section class="hero" id="top">
+    <div class="hero__text">
+      <p class="eyebrow">{{ $h.hero.eyebrow }}</p>
+      <h1 class="hero__title"><span>{{ $h.hero.title_a }}</span><span class="accent">{{ $h.hero.title_b }}</span></h1>
+      <p class="lead">{{ $h.hero.intro }}</p>
+      <p class="actions">
+        <a class="btn" href="#vision">{{ $h.hero.cta_primary }}</a>
+        <a class="btn btn--ghost" href="#projects">{{ $h.hero.cta_secondary }}</a>
+      </p>
+      {{ with $h.hero.current }}<p class="muted small">{{ . }}</p>{{ end }}
+    </div>
+    <div class="hero__diagram">
+      <div class="card diagram" role="img" aria-label="Model and spec to generator or agent to running software">
+        {{ range $i, $d := $h.diagram }}
+          {{ if $i }}<p class="diagram__arrow" aria-hidden="true">↓</p>{{ end }}
+          <div class="flow__node{{ if $d.highlight }} flow__node--hi{{ end }}"><p class="flow__label">{{ $d.label }}</p><p class="flow__title flow__title--lg">{{ $d.title }}</p></div>
+        {{ end }}
+      </div>
+    </div>
+    <div class="stats">
+      {{ range $h.stats }}<div class="stat"><p class="stat__value">{{ .value }}</p><p class="stat__label">{{ .label }}</p></div>{{ end }}
+    </div>
+  </section>
+
+  <section class="spec" id="vision">
+    <p class="spec__label"><span>01</span> / Vision</p>
+    <div class="spec__body">
+      <h2>{{ $h.vision.heading }}</h2>
+      <p class="statement">{{ $h.vision.statement }}</p>
+      <p class="muted prose-narrow">{{ $h.vision.text }}</p>
+      <div class="rows">
+        {{ range $h.principles }}
+        <div class="row"><span class="row__n">{{ .n }}</span><h3>{{ .title }}</h3><p class="muted">{{ .text }}</p></div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="spec" id="projects">
+    <p class="spec__label"><span>02</span> / Projects</p>
+    <div class="spec__body">
+      <div class="spec__head">
+        <h2>{{ $h.projects.heading }}</h2>
+        <div class="actions">
+          <a class="btn btn--ghost btn--small" href="{{ site.Params.github }}">github.com/mbrigl →</a>
+          <a class="btn btn--ghost btn--small" href="{{ site.Params.hivevm }}">github.com/hivevm →</a>
+        </div>
+      </div>
+      <p class="muted prose-narrow">{{ $h.projects.text }}</p>
+      <div class="cards">
+        {{ range (where site.RegularPages "Section" "projects").ByWeight }}{{ partial "project-card.html" . }}{{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="spec spec--wide" id="career">
+    <p class="spec__label"><span>03</span> / Career</p>
+    <div class="spec__body">
+      <h2>{{ $c.heading }}</h2>
+      <p class="muted prose-narrow">{{ $c.text }}</p>
+    </div>
+    <ol class="timeline">
+      {{ range $c.cases }}
+      {{ if .featured }}
+      <li class="timeline__feature">
+        <p class="timeline__years">{{ .years }}</p>
+        {{ partial "career-featured.html" . }}
+      </li>
+      {{ else if .roles }}
+      <li class="timeline__group">
+        <p class="timeline__years">{{ .years }}</p>
+        <div>
+          <h3>{{ .company }}</h3>
+          <ol class="roles">
+            {{ range .roles }}
+            {{ if .event }}
+            <li class="roles__event">
+              <p class="roles__years">{{ .years }}</p>
+              <p class="roles__event-text">{{ .event }}</p>
+            </li>
+            {{ else if .featured }}
+            <li class="roles__feature">{{ partial "career-featured.html" . }}</li>
+            {{ else }}
+            <li>
+              <p class="roles__years">{{ .years }}</p>
+              <h4>{{ .title }}</h4>
+              <p class="muted small">{{ .role }}</p>
+              {{ with .text }}<p class="muted">{{ . }}</p>{{ end }}
+              {{ partial "chips.html" .tags }}
+            </li>
+            {{ end }}
+            {{ end }}
+          </ol>
+        </div>
+      </li>
+      {{ else }}
+      <li>
+        <p class="timeline__years">{{ .years }}</p>
+        <div>
+          <h3>{{ .title }}</h3>
+          <p class="muted small">{{ .role }}</p>
+          <p class="muted">{{ .text }}</p>
+          {{ partial "chips.html" .tags }}
+        </div>
+      </li>
+      {{ end }}
+      {{ end }}
+    </ol>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="card contact__card">
+      <div>
+        <h2>{{ $h.contact.heading }}</h2>
+        <p class="muted">{{ $h.contact.text }}</p>
+      </div>
+      <p class="actions">
+        {{ with site.Params.email }}<a class="btn" href="mailto:{{ . }}">Email me</a>{{ end }}
+        <a class="btn{{ if site.Params.email }} btn--ghost{{ end }}" href="{{ site.Params.linkedin }}">LinkedIn</a>
+        <a class="btn btn--ghost" href="{{ site.Params.github }}">GitHub</a>
+      </p>
+    </div>
+  </section>
+
+</div>
+{{ end }}

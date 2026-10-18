@@ -1,0 +1,47 @@
+{
+  "name": "Hugo Website",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
+
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind"
+  ],
+
+  "shutdownAction": "stopContainer",
+
+  // Runs on the host before the container is created. Ensures the bind-mount source for the agent
+  // config exists, so Docker does not auto-create it as a root-owned directory (which breaks
+  // credential writes inside the container).
+  "initializeCommand": "mkdir -p ${localEnv:HOME}/.claude",
+
+  // Hugo (extended) for local previews (ADR-0005). Keep the version in sync with HUGO_VERSION in
+  // .github/workflows/hugo.yml so the preview matches the deployed build.
+  "features": {
+    "ghcr.io/devcontainers/features/hugo:1": {
+      "version": "0.168.0",
+      "extended": true
+    }
+  },
+
+  // Forward the `hugo server` preview port to the host.
+  "forwardPorts": [1313],
+  "portsAttributes": {
+    "1313": {
+      "label": "Hugo preview",
+      "onAutoForward": "notify"
+    }
+  },
+
+  "customizations": {
+    // VS Code extensions installed inside the container
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-vscode-remote.remote-containers"
+      ]
+    }
+  }
+}

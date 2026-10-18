@@ -1,0 +1,10 @@
+<article class="card featured">
+  <div class="featured__text">
+    <p class="mono accent small">{{ .meta }}</p>
+    <h3>{{ .title }}</h3>
+    <p class="muted">{{ .text }}</p>
+  </div>
+  <dl class="stack">
+    {{ range .stack }}<div><dt>{{ .key }}</dt><dd>{{ .value }}</dd></div>{{ end }}
+  </dl>
+</article>

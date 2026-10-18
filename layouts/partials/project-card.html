@@ -1,0 +1,14 @@
+<article class="card repo">
+  <div class="repo__head">
+    <a class="repo__name" href="{{ .RelPermalink }}">{{ .Params.repo }}</a>
+    <span class="chip-static">Public</span>
+  </div>
+  <p class="repo__desc">{{ .Params.summary }}</p>
+  {{ partial "chips.html" .Params.tags }}
+  <div class="repo__meta">
+    <span><i class="dot" aria-hidden="true"></i>{{ .Params.language }}</span>
+    <span>{{ .Params.license }}</span>
+    <span>{{ .Params.commits }}</span>
+    <span>Updated {{ .Params.updated }}</span>
+  </div>
+</article>

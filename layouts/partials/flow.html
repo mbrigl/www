@@ -1,0 +1,13 @@
+{{- with .nodes -}}
+<div class="flow" role="img" aria-label="{{ range $i, $n := . }}{{ if $i }} to {{ end }}{{ $n.title }}{{ end }}">
+  {{- $arrow := $.arrow | default "→" -}}
+  {{- range $i, $n := . -}}
+    {{- if $i }}<span class="flow__arrow" aria-hidden="true">{{ $arrow }}</span>{{ end -}}
+    <div class="flow__node{{ if $n.highlight }} flow__node--hi{{ end }}">
+      <p class="flow__label">{{ $n.label }}</p>
+      <p class="flow__title">{{ $n.title }}</p>
+      {{ with $n.text }}<p class="flow__text">{{ . }}</p>{{ end }}
+    </div>
+  {{- end -}}
+</div>
+{{- end -}}

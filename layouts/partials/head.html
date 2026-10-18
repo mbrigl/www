@@ -1,0 +1,35 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $title := site.Title -}}
+{{- $desc := site.Params.description -}}
+{{- if .IsHome -}}
+  {{- $title = printf "%s — %s" site.Title site.Params.tagline -}}
+{{- else -}}
+  {{- $title = printf "%s — %s" .Title site.Title -}}
+  {{- with .Params.summary }}{{ $desc = . }}{{ else }}{{ with .Description }}{{ $desc = . }}{{ end }}{{ end -}}
+{{- end -}}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="color-scheme" content="dark light">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<meta property="og:type" content="{{ cond .IsHome "website" "article" }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta name="twitter:card" content="summary">
+
+{{/* Apply the saved theme before first paint, so there is no flash. */}}
+<script>
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+
+{{ range slice "ibm-plex-sans-latin-400-normal" "ibm-plex-sans-latin-600-normal" }}
+<link rel="preload" href="{{ printf "fonts/%s.woff2" . | relURL }}" as="font" type="font/woff2" crossorigin>
+{{ end }}
+{{ with slice (resources.Get "css/main.css") (resources.Get "css/chroma.css") | resources.Concat "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">
+{{ end }}

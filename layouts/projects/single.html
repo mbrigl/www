@@ -1,0 +1,76 @@
+{{ define "main" }}
+{{ $repo := .Params.repo }}
+{{ $parts := split $repo "/" }}
+{{ $n := 0 }}
+<div class="wrap page">
+  <p class="crumb"><a href="{{ "/#projects" | relURL }}">← All repositories</a></p>
+
+  <section class="project-head">
+    <h1 class="page__title mono">{{ index $parts 0 }}/<span class="accent">{{ index $parts 1 }}</span></h1>
+    <p class="lead muted">{{ .Params.summary }}</p>
+    {{ partial "chips.html" .Params.tags }}
+    <div class="card facts">
+      <dl>
+        <div><dt>Language</dt><dd><i class="dot" aria-hidden="true"></i>{{ .Params.language }}</dd></div>
+        <div><dt>License</dt><dd>{{ .Params.license }}</dd></div>
+        <div><dt>Commits</dt><dd>{{ .Params.commits }}</dd></div>
+        <div><dt>Last update</dt><dd>{{ .Params.updated }}</dd></div>
+      </dl>
+      <a class="btn" href="https://github.com/{{ $repo }}">View on GitHub</a>
+    </div>
+  </section>
+
+  <section class="psec">
+    {{ $n = add $n 1 }}
+    <p class="psec__label"><span>{{ printf "%02d" $n }}</span> / Overview</p>
+    <div class="prose">{{ .Content }}</div>
+  </section>
+
+  {{ with .Params.parts }}
+  <section class="psec">
+    {{ $n = add $n 1 }}
+    <p class="psec__label"><span>{{ printf "%02d" $n }}</span> / Architecture</p>
+    <h2>How it fits together</h2>
+    {{ with $.Params.flow }}<div class="card flowbox">{{ partial "flow.html" . }}</div>{{ end }}
+    <div class="rows">
+      {{ range . }}<div class="row"><h3>{{ .title }}</h3><p class="muted">{{ .text }}</p></div>{{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{ with .Params.docs }}
+  <section class="psec">
+    {{ $n = add $n 1 }}
+    <p class="psec__label"><span>{{ printf "%02d" $n }}</span> / Decisions</p>
+    <h2>Specifications and decisions</h2>
+    <p class="muted prose-narrow">Written specifications and architecture decision records live next to the code, so the reasoning behind the design stays reviewable.</p>
+    <ul class="doclist">
+      {{ range . }}
+      {{ $kind := cond (hasSuffix .path "/") "tree" "blob" }}
+      <li><a class="mono" href="https://github.com/{{ $repo }}/{{ $kind }}/HEAD/{{ .path }}">{{ .path }}</a><span class="muted">{{ .text }}</span></li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ end }}
+
+  {{ with .Params.start }}
+  <section class="psec">
+    {{ $n = add $n 1 }}
+    <p class="psec__label"><span>{{ printf "%02d" $n }}</span> / Getting started</p>
+    <h2>Try it</h2>
+    {{ with $.Params.start_note }}<p class="muted prose-narrow">{{ . }}</p>{{ end }}
+    {{ $session := slice }}{{ range . }}{{ $session = $session | append (printf "$ %s" .) }}{{ end }}
+    {{ transform.Highlight (delimit $session "\n") "console" }}
+    {{ with $.Params.code }}
+    <p class="mono small muted code-title">{{ $.Params.code_title }}</p>
+    {{ transform.Highlight . ($.Params.code_lang | default "text") }}
+    {{ end }}
+  </section>
+  {{ end }}
+
+  <nav class="pager" aria-label="Other projects">
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}"><span class="muted small">Previous</span><span class="mono">{{ .Params.repo }}</span></a>{{ else }}<span></span>{{ end }}
+    {{ with .NextInSection }}<a class="pager__next" href="{{ .RelPermalink }}"><span class="muted small">Next</span><span class="mono">{{ .Params.repo }}</span></a>{{ end }}
+  </nav>
+</div>
+{{ end }}
