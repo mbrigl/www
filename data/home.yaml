@@ -1,0 +1,37 @@
+hero:
+  eyebrow: "Markus Brigl · Model-driven and spec-driven development"
+  title_a: Software
+  title_b: Architect
+  intro: "I'm a software architect and fullstack developer in the field of model-driven and spec-driven development."
+  current: "Currently Product Owner at Würth IT Italy, Bolzano"   # delete this line to hide it
+  cta_primary: "My vision"
+  cta_secondary: "See the projects"
+
+diagram:
+  - { label: INPUT,  title: "Model and spec" }
+  - { label: CORE,   title: "Generator · agent", highlight: true }
+  - { label: OUTPUT, title: "Running software" }
+
+stats:
+  - { value: "23 yrs",     label: "building software, since 2003" }
+  - { value: "8 yrs",      label: "as CTO, 2016 to 2024" }
+  - { value: "CAFM · GIS", label: "enterprise domains" }
+
+vision:
+  heading: "Models and specs outlive the stack"
+  statement: "Software should be described by what it means, not by the technology it happens to run on."
+  text: "Since 2003 I have worked on one idea: describe the system first, then let tools produce the technology. From UML-based ERP frameworks and an Eclipse code generator to a low-code platform on hexagonal architecture, the stack changed many times. Today, with AI in the loop, the written specification takes the same role: specs and architecture decisions define the intent, and coding agents build against them. What stays is the description of intent."
+
+principles:
+  - { n: "01", title: "Start from the model",       text: "Describe what a system means, independent of any platform. Technologies change, the model stays." }
+  - { n: "02", title: "Write the spec first",       text: "Specifications and architecture decision records define intent before code. People decide, agents implement, and the spec is the contract between them." }
+  - { n: "03", title: "Keep the core independent",  text: "Hexagonal architecture keeps business logic free of frameworks, so the stack can evolve without disrupting it." }
+  - { n: "04", title: "Generate, don't repeat",     text: "Generators, templates and coding agents turn models and specs into running code, so effort goes into decisions instead of boilerplate." }
+
+projects:
+  heading: "Selected projects"
+  text: "Selected repositories from my account and from the HiveVM organization."
+
+contact:
+  heading: "Let's talk architecture"
+  text: "Model-driven and spec-driven development, platform architecture or a collaboration."

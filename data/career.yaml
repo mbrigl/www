@@ -1,0 +1,48 @@
+heading: "Platforms built from models"
+text: "Every role since 2003, from a UML-based ERP platform to product ownership with AI in development."
+cases:
+  - years: "2026 – today"
+    title: "NetEye: monitoring, observability and security"
+    role: "Product Owner · Würth IT Italy"
+    text: "Product Owner of NetEye, with around 100 people across development and sales. Responsible for backlog, roadmap, stakeholders and prioritization up to the product vision. Brought AI into development at scale and fostered communication between the teams."
+    tags: [Product ownership, Roadmap, AI-assisted development]
+  - years: "2025 – 2026"
+    title: "ERP for crafts, fruit and wine growing"
+    role: "Software Engineer · PRO DATA"
+    text: "Senior engineer in a small team. Modernized the development process from Subversion to Git with automatic builds, built a container-based integration test environment on real databases and introduced code generation for business applications. Brought in a graphical scheduler and declarative modeling, and developed a tunnel with automatic updates for secure remote access to customer devices such as POS systems and printers via the cloud."
+    tags: [Git, Containers, Code generation, Remote access]
+  - years: "2007 – 2024"
+    company: "TOL GmbH"
+    roles:
+      - years: "2016 – 2024"
+        featured: true
+        meta: "FEATURED · 2016 – 2024 · CTO, TOL GmbH"
+        title: "Enterprise low-code application platform for CAFM"
+        text: "A model-driven low-code platform for Computer-Aided Facility Management, used by large enterprise customers with several thousand employees. Every customer solution is described purely by a model of data, business logic, processes and UI, so it stays independent of technology and platform, and updates reach customers without software rollouts. Hexagonal architecture abstracts every dependency. Led a team of five to six developers in Bolzano and delivered full-stack, with clients for web browsers and native mobile devices."
+        stack:
+          - { key: Backend,            value: "Java, C++, Rust" }
+          - { key: Frontend,           value: "GWT, C++/Qt" }
+          - { key: "JavaScript engine", value: "V8" }
+          - { key: Architecture,       value: "MDA, hexagonal" }
+      - years: "2016"
+        event: "Territorium Online integrated into TOL GmbH"
+      - years: "2008 – 2016"
+        title: "WebGIS 3.0 and mobile GIS"
+        role: "Software Architect & Partner · Territorium Online"
+        text: "The third generation of the WebGIS platform, at around 30 customers, mostly public administrations, with several thousand users, built with a team of three to four. A layered architecture on the WMS and WFS standards, a UI fully in JavaScript and communication via REST. Native mobile apps for iOS and Android capture data in the field, store it offline and synchronize it, rendering maps on the device through a port of the MapServer C library. A model-driven web application brought GIS into facility management."
+        tags: [WMS/WFS, REST, "C++/Qt", UMN MapServer, pgRouting]
+      - years: "2007"
+        title: "Web GIS for public administrations"
+        role: "Software Developer · Territorium Online"
+        text: "A web GIS application for public administrations in northern Italy and southern Germany, in a team of two. Designed an architecture with a clear separation of UI and business logic, and introduced version control and a ticket system."
+        tags: [JavaScript, HTML5]
+  - years: "2005 – 2006"
+    title: "UML2 designer and code generator for Eclipse"
+    role: "Co-founder & CEO · Alpisco"
+    text: "Co-founded with two colleagues to make software modelable end to end. A graphical UML2 designer plugin for the Eclipse IDE with automated code generation for enterprise Java applications and business process automation."
+    tags: [Eclipse, UML2, EJB, Linux]
+  - years: "2003 – 2004"
+    title: "Model-oriented Java platform for ERP/CRM"
+    role: "Requirements Engineer · Würth Phoenix"
+    text: "A model-oriented Java platform for building ERP/CRM systems, which became the basis of the ERP system for the Würth Group. Grew from platform developer for the application layer to Requirements Engineer of the entire platform, in a team of about 15."
+    tags: [UML, Java, Linux]
