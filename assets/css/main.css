@@ -247,6 +247,7 @@ figure.flowbox { margin-right: 0; margin-bottom: 0; margin-left: 0; }
 .featured { display: flex; flex-wrap: wrap; gap: 28px 48px; margin-top: 40px; padding: 32px; }
 .featured__text { flex: 1 1 340px; min-width: 0; }
 .featured h3 { margin: 14px 0 16px; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em; }
+.featured__task { margin: -10px 0 16px; }
 .stack { flex: 0 1 240px; min-width: 200px; align-self: center; display: flex; flex-direction: column; }
 .stack div { padding: 12px 0; border-bottom: 1px solid var(--line); }
 .stack div:last-child { border-bottom: 0; }

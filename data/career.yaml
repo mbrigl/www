@@ -15,11 +15,12 @@ cases:
     tags: [Git, Containers, Code generation, Remote access]
   - years: "2007 – 2024"
     hue: plum
-    company: "TOL GmbH"
+    company: "CTO & Partner · TOL GmbH"
     roles:
       - years: "2016 – 2024"
         featured: true
-        meta: "FEATURED · 2016 – 2024 · CTO, TOL GmbH"
+        meta: "FEATURED · 2016 – 2024"
+        role: "CTO · TOL GmbH"
         title: "Enterprise low-code application platform for CAFM"
         text: "A model-driven low-code platform for Computer-Aided Facility Management, used by large enterprise customers with several thousand employees. Every customer solution is described purely by a model of data, business logic, processes and UI, so it stays independent of technology and platform, and updates reach customers without software rollouts. Hexagonal architecture abstracts every dependency. Led a team of five to six developers in Bolzano and delivered full-stack, with clients for web browsers and native mobile devices."
         stack:

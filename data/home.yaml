@@ -3,7 +3,7 @@ hero:
   title_a: Software
   title_b: Architect
   intro: "I'm a software architect and fullstack developer in the field of model-driven and spec-driven development."
-  current: "Currently Product Owner at Würth IT Italy, Bolzano"   # delete this line to hide it
+  current: "Product Owner at Würth IT Italy, Bolzano"   # delete this line to hide it
   cta_primary: "My vision"
   cta_secondary: "See the projects"
 
