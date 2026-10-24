@@ -2,6 +2,7 @@
 title: "libgpkg2"
 repo: "hivevm/libgpkg2"
 weight: 50
+hue: "rust"
 summary: "SQLite loadable extension for GeoPackage file access. A fork of luciad/libgpkg, revived with a specification, conformance notes and ADRs."
 tags: ["C++", "GeoPackage", "SQLite", "Specs + ADRs"]
 language: "C++"

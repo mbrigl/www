@@ -12,6 +12,8 @@ data/career.yaml           career timeline, newest first (featured: true renders
                            company + roles groups several roles at one company; a role with
                            event instead of a title marks a change such as a merger)
 content/projects/*.md      one page per project (front matter = card and facts, body = overview)
+                           hue (projects, career cases, eras, stats): saffron, rust, plum, olive,
+                           brick or rose; colours the item, a project page takes its hue
 layouts/                   templates (index, projects/list, projects/single, partials)
 assets/css/main.css        all styles, design tokens at the top
 assets/css/chroma.css      code highlighting colours (generated, see below)
@@ -29,7 +31,8 @@ and applied by a tiny inline script before first paint, so there is no flash.
 
 The colours are CSS tokens using `light-dark()` (supported by all current browsers), so every colour
 exists once, with its light and dark value side by side. Change the palette in the first block of
-`assets/css/main.css`.
+`assets/css/main.css`: six earth hues (saffron is the accent), each a fill for surfaces and an ink for
+text and lines.
 
 ## Code blocks
 

@@ -13,23 +13,24 @@ diagram:
   - { label: OUTPUT, title: "Running software" }
 
 stats:
-  - { value: "23 yrs",     label: "building software, since 2003" }
-  - { value: "8 yrs",      label: "as CTO, 2016 to 2024" }
-  - { value: "CAFM · GIS", label: "enterprise domains" }
+  - { value: "23 yrs",     label: "building software, since 2003", hue: saffron }
+  - { value: "8 yrs",      label: "as CTO, 2016 to 2024", hue: rust }
+  - { value: "CAFM · GIS", label: "enterprise domains", hue: plum }
 
 vision:
   heading: "Models and specs outlive the stack"
   statement: "Software should be described by what it means, not by the technology it happens to run on."
   text: "Since 2003 I have worked on one idea: describe the system first, then let tools produce the technology. From UML-based ERP frameworks and an Eclipse code generator to a low-code platform on hexagonal architecture, the stack changed many times. Today, with AI in the loop, the written specification takes the same role: specs and architecture decisions define the intent, and coding agents build against them. What stays is the description of intent."
 
-# Vision graphic: one description of intent on top, the stacks it was built with below
+# Vision graphic: one description of intent on top, the stacks it was built with below.
+# hue (here and in stats): saffron, rust, plum, olive, brick or rose; the rail runs through the era hues
 eras_intent: { label: "STAYS", title: "Model and spec", text: "The description of intent" }
 eras_caption: "The stack changed with every generation. The description of intent stayed."
 eras:
-  - { years: "2003", title: "ERP/CRM platform",        text: "Model-oriented Java · UML" }
-  - { years: "2005", title: "Eclipse code generator",  text: "UML2 designer · enterprise Java" }
-  - { years: "2016", title: "Low-code CAFM platform",  text: "MDA · hexagonal · Java, C++, Rust" }
-  - { years: "2026", title: "Spec-driven with agents", text: "Specs · ADRs · coding agents" }
+  - { years: "2003", title: "ERP/CRM platform",        text: "Model-oriented Java · UML", hue: brick }
+  - { years: "2005", title: "Eclipse code generator",  text: "UML2 designer · enterprise Java", hue: olive }
+  - { years: "2016", title: "Low-code CAFM platform",  text: "MDA · hexagonal · Java, C++, Rust", hue: plum }
+  - { years: "2026", title: "Spec-driven with agents", text: "Specs · ADRs · coding agents", hue: saffron }
 
 principles:
   - { n: "01", title: "Start from the model",       text: "Describe what a system means, independent of any platform. Technologies change, the model stays." }

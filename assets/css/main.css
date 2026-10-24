@@ -60,10 +60,20 @@
   --line:      light-dark(rgba(22, 22, 29, 0.10), rgba(255, 255, 255, 0.08));
   --line-2:    light-dark(rgba(22, 22, 29, 0.22), rgba(255, 255, 255, 0.18));
   --header:    light-dark(rgba(251, 250, 247, 0.92), rgba(10, 10, 15, 0.92));
-  --accent:    #f5b83d;                /* filled surfaces */
-  --accent-ink: light-dark(#9a6700, #f5b83d); /* accent text, readable on both */
-  --accent-2:  #ff8a3d;
+  /* Earth palette: fill for surfaces, ink for text and lines (readable on both themes) */
+  --saffron: #eea83a; --saffron-ink: light-dark(#875800, #f2b85a);
+  --rust:    #e07b2c; --rust-ink:    light-dark(#a04d0e, #f5a462);
+  --plum:    #9c4a7a; --plum-ink:    light-dark(#84325f, #e09cc4);
+  --olive:   #8c9a34; --olive-ink:   light-dark(#55610e, #c2cf66);
+  --brick:   #b5432f; --brick-ink:   light-dark(#9a3322, #f08a76);
+  --rose:    #d6728a; --rose-ink:    light-dark(#a33f5a, #f0a3b6);
+
+  --accent:    var(--saffron);         /* filled surfaces */
+  --accent-ink: var(--saffron-ink);    /* accent text */
   --on-accent: #1a1204;
+  /* Hue of the current item; a hue-* class sets it, otherwise it is the accent */
+  --h: var(--accent);
+  --h-ink: var(--accent-ink);
 
   --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -92,6 +102,13 @@ h1, h2, h3 { font-weight: 600; }
 .muted { color: var(--muted); }
 .small { font-size: 14px; }
 .accent { color: var(--accent-ink); }
+/* Hues, set by `hue` in data/*.yaml and project front matter */
+.hue-saffron { --h: var(--saffron); --h-ink: var(--saffron-ink); }
+.hue-rust    { --h: var(--rust);    --h-ink: var(--rust-ink); }
+.hue-plum    { --h: var(--plum);    --h-ink: var(--plum-ink); }
+.hue-olive   { --h: var(--olive);   --h-ink: var(--olive-ink); }
+.hue-brick   { --h: var(--brick);   --h-ink: var(--brick-ink); }
+.hue-rose    { --h: var(--rose);    --h-ink: var(--rose-ink); }
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
 .skip-link { position: absolute; left: -999px; top: 8px; padding: 8px 14px; background: var(--accent); color: var(--on-accent); border-radius: var(--radius); z-index: 20; }
 .skip-link:focus { left: 8px; }
@@ -114,7 +131,7 @@ section[id] { scroll-margin-top: 112px; }
 }
 .chip-static { padding: 2px 10px; font-size: 12px; color: var(--muted); }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
-.dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--accent-2); }
+.dot { display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 50%; background: var(--h); }
 
 /* ---------- Header ---------- */
 .site-header { position: sticky; top: 0; z-index: 10; background: var(--header); border-bottom: 1px solid var(--line);
@@ -150,7 +167,7 @@ section[id] { scroll-margin-top: 112px; }
 .diagram { display: flex; flex-direction: column; gap: 8px; padding: 20px; }
 .diagram__arrow { text-align: center; color: var(--muted); font-family: var(--mono); }
 .stats { flex: 1 1 100%; display: flex; flex-wrap: wrap; gap: 24px 40px; margin-top: 24px; }
-.stat { flex: 1 1 200px; min-width: 0; padding-top: 20px; border-top: 1px solid var(--line-2); }
+.stat { flex: 1 1 200px; min-width: 0; padding-top: 20px; border-top: 2px solid var(--h); }
 .stat__value { font-weight: 600; font-size: 40px; line-height: 1; letter-spacing: -0.03em; }
 .stat__label { margin-top: 8px; font-size: 14px; color: var(--muted); }
 
@@ -169,8 +186,11 @@ section[id] { scroll-margin-top: 112px; }
 .eras { margin: 40px 0 0; }
 .eras__list { --gap: 16px; --mid: calc((100% - (var(--n) - 1) * var(--gap)) / (2 * var(--n))); display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: var(--gap); margin-top: 32px; position: relative; }
 /* Horizontal rail under the intent box, and one drop per era */
-.eras__list::before { content: ""; position: absolute; left: var(--mid); right: var(--mid); top: -16px; height: 1px; background: var(--accent-ink); }
-.eras__list > li { position: relative; }
+.eras__list::before { content: ""; position: absolute; left: var(--mid); right: var(--mid); top: -16px; height: 1px; background: var(--rail, var(--accent-ink)); }
+/* Each era in its own hue: label and connector take the ink, the box a tint */
+.eras__list > li { position: relative; --accent-ink: var(--h-ink);
+  border-color: color-mix(in srgb, var(--h) 55%, var(--line-2)); background: color-mix(in srgb, var(--h) 10%, var(--surface-2)); }
+.eras__list .flow__label { font-weight: 500; }
 .eras__list > li::before { content: ""; position: absolute; left: 50%; top: -16px; height: 16px; width: 1px; background: var(--accent-ink); }
 .eras__intent { position: relative; text-align: center; }
 .eras__intent::after { content: ""; position: absolute; left: 50%; bottom: -17px; height: 16px; width: 1px; background: var(--accent-ink); }
@@ -214,7 +234,9 @@ figure.flowbox { margin-right: 0; margin-bottom: 0; margin-left: 0; }
 
 /* ---------- Projects ---------- */
 .cards { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
-.repo { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 22px 24px; }
+.repo { flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 14px; padding: 22px 24px;
+  --accent-ink: var(--h-ink); border-top: 3px solid var(--h); }
+.repo .chips li { border-color: color-mix(in srgb, var(--h) 45%, var(--line-2)); }
 .repo__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .repo__name { font: 600 15px var(--mono); color: var(--accent-ink); overflow-wrap: anywhere; }
 .repo__name:hover { text-decoration: underline; }
@@ -232,6 +254,8 @@ figure.flowbox { margin-right: 0; margin-bottom: 0; margin-left: 0; }
 .stack dd { font-weight: 600; }
 /* Timeline: years | spine with one dot per entry | entry. --spine is the line's x position. */
 .timeline { --spine: 192px; --dot: 11px; --dot-top: 9px; margin-top: 16px; }
+/* Each entry in its own hue: dot, years and featured card follow it */
+.timeline > li { --accent: var(--h); --accent-ink: var(--h-ink); }
 .timeline > li { position: relative; display: grid; grid-template-columns: 160px minmax(0, 1fr); column-gap: 64px; padding-bottom: 48px; }
 .timeline > li:last-child { padding-bottom: 0; }
 .timeline > li::before { content: ""; position: absolute; left: var(--spine); top: 0; bottom: 0; width: 1px; background: var(--line-2); }
@@ -277,7 +301,7 @@ figure.flowbox { margin-right: 0; margin-bottom: 0; margin-left: 0; }
 .site-footer__bar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-top: 8px; padding-bottom: 40px; }
 
 /* ---------- Inner pages ---------- */
-.page { padding-top: 72px; padding-bottom: 80px; }
+.page { padding-top: 72px; padding-bottom: 80px; --accent-ink: var(--h-ink); }   /* a project page takes its hue */
 .crumb { margin-bottom: 28px; font-size: 15px; }
 .crumb a { color: var(--accent-ink); }
 .page__title { font-size: clamp(30px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.02em; overflow-wrap: anywhere; }

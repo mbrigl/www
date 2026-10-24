@@ -2,6 +2,7 @@
 title: "ocelli"
 repo: "hivevm/ocelli"
 weight: 40
+hue: "olive"
 summary: "View and edit Git repositories. A Git client that draws history as a lane graph, as desktop app (Tauri), terminal app or read-only remote server."
 tags: ["Rust", "Tauri", "Git", "Web UI"]
 language: "Rust · TypeScript"

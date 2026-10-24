@@ -2,6 +2,7 @@
 title: "comb"
 repo: "hivevm/comb"
 weight: 30
+hue: "plum"
 summary: "Node-based visual workflow engine and UI coordinator. A browser node editor on WebGL2 with a Rust engine compiled to WebAssembly, built for tens of thousands of nodes."
 tags: ["Rust", "WebAssembly", "WebGL2", "Specs + ADRs"]
 language: "Rust · TypeScript"

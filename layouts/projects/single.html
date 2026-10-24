@@ -2,7 +2,7 @@
 {{ $repo := .Params.repo }}
 {{ $parts := split $repo "/" }}
 {{ $n := 0 }}
-<div class="wrap page">
+<div class="wrap page{{ with .Params.hue }} hue-{{ . }}{{ end }}">
   <p class="crumb"><a href="{{ "/#projects" | relURL }}">← All repositories</a></p>
 
   <section class="project-head">

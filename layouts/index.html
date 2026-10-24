@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="stats">
-      {{ range $h.stats }}<div class="stat"><p class="stat__value">{{ .value }}</p><p class="stat__label">{{ .label }}</p></div>{{ end }}
+      {{ range $h.stats }}<div class="stat{{ with .hue }} hue-{{ . }}{{ end }}"><p class="stat__value">{{ .value }}</p><p class="stat__label">{{ .label }}</p></div>{{ end }}
     </div>
   </section>
 
@@ -36,8 +36,10 @@
       {{ with $h.eras }}
       <figure class="eras">
         {{ with $h.eras_intent }}<div class="flow__node flow__node--hi eras__intent"><p class="flow__label">{{ .label }}</p><p class="flow__title">{{ .title }}</p><p class="flow__text">{{ .text }}</p></div>{{ end }}
-        <ol class="eras__list" style="--n: {{ len . }}">
-          {{ range . }}<li class="flow__node"><p class="flow__label">{{ .years }}</p><p class="flow__title">{{ .title }}</p><p class="flow__text">{{ .text }}</p></li>{{ end }}
+        {{ $rail := slice }}{{ range . }}{{ with .hue }}{{ $rail = $rail | append (printf "var(--%s-ink)" .) }}{{ end }}{{ end }}
+        {{ $style := printf "--n: %d" (len .) }}{{ if gt (len $rail) 1 }}{{ $style = printf "%s; --rail: linear-gradient(90deg, %s)" $style (delimit $rail ", ") }}{{ end }}
+        <ol class="eras__list" style="{{ $style | safeCSS }}">
+          {{ range . }}<li class="flow__node{{ with .hue }} hue-{{ . }}{{ end }}"><p class="flow__label">{{ .years }}</p><p class="flow__title">{{ .title }}</p><p class="flow__text">{{ .text }}</p></li>{{ end }}
         </ol>
         {{ with $h.eras_caption }}<figcaption class="muted small">{{ . }}</figcaption>{{ end }}
       </figure>
@@ -76,12 +78,12 @@
     <ol class="timeline">
       {{ range $c.cases }}
       {{ if .featured }}
-      <li class="timeline__feature">
+      <li class="timeline__feature{{ with .hue }} hue-{{ . }}{{ end }}">
         <p class="timeline__years">{{ .years }}</p>
         {{ partial "career-featured.html" . }}
       </li>
       {{ else if .roles }}
-      <li class="timeline__group">
+      <li class="timeline__group{{ with .hue }} hue-{{ . }}{{ end }}">
         <p class="timeline__years">{{ .years }}</p>
         <div>
           <h3>{{ .company }}</h3>
@@ -108,7 +110,7 @@
         </div>
       </li>
       {{ else }}
-      <li>
+      <li{{ with .hue }} class="hue-{{ . }}"{{ end }}>
         <p class="timeline__years">{{ .years }}</p>
         <div>
           <h3>{{ .title }}</h3>

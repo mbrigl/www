@@ -2,6 +2,7 @@
 title: "nuc"
 repo: "hivevm/nuc"
 weight: 60
+hue: "rose"
 summary: "Template for agentic development in a Dev Container. A written specification and architecture decision records guide the work, and one AGENTS.md rules file is read by all coding agents."
 tags: ["Spec-driven", "Dev Container", "AGENTS.md"]
 language: "Shell"

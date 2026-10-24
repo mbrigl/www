@@ -2,6 +2,7 @@
 title: "waggle"
 repo: "hivevm/waggle"
 weight: 20
+hue: "saffron"
 summary: "HiveVM CC, a parser generator forked from JavaCC. Tree building is defined inside the grammar; a Gradle plugin generates parsers in Java, C++ or Rust."
 tags: ["Parser generator", "Gradle plugin", "Java · C++ · Rust"]
 language: "Java"

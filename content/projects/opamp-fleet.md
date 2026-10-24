@@ -2,6 +2,7 @@
 title: "opamp-fleet"
 repo: "mbrigl/opamp-fleet"
 weight: 10
+hue: "brick"
 summary: "Fleet management based on OpAMP. A Rust implementation of OpenTelemetry's OpAMP protocol with an API-first server and a native client that supervises many agents."
 tags: ["Rust", "OpAMP", "Hexagonal", "Specs + ADRs"]
 language: "Rust"

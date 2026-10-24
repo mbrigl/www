@@ -1,4 +1,4 @@
-<article class="card repo">
+<article class="card repo{{ with .Params.hue }} hue-{{ . }}{{ end }}">
   <div class="repo__head">
     <a class="repo__name" href="{{ .RelPermalink }}">{{ .Params.repo }}</a>
     <span class="chip-static">Public</span>
